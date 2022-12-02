@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>My Library</h1>
+    <div class="grid-container">
+        
+    </div>
+
+    <div id="form-container">
+        <button id="close-form-btn" style="margin-bottom: 5px;">close</button>
+        <form>
+            <div>
+                <label for="title">Title: </label>
+                <input type="text" id="title">
+            </div>
+
+            <div>
+                <label for="author">Author: </label>
+                <input type="text" id="author">
+            </div>
+
+            <div>
+                <label for="pages">Pages: </label>
+                <input type="number" id="pages">
+            </div>
+
+            <div>
+                <label for="isRead">Have you read it before?</label>
+                <input id="isRead" type="checkbox" name="isReadCheckbox">
+            </div>
+
+            <button id="add-book-btn">Add</button>
+        </form>
+    </div>
+
+    <button id="show-form-btn" class="btn" role="button">Add Book</button>
+
+    <script src="library.js"></script>
+</body>
+</html>
