@@ -95,6 +95,8 @@ addBookButton.addEventListener("click", (event) => {
         
         addBookToLibrary(book);
 
+        closeBookForm();
+
         //display the new books
         displayLibrary();
     } else {
