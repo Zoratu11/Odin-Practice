@@ -51,7 +51,10 @@ function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
-//Adds library to DOM
+/*Adds library to DOM 
+If this was a real website I would make sure to keep track of the last
+book that was added so we dont loop through them all again but it doesnt
+really matter for this project*/
 function displayLibrary() {
     for(let i = 0; i < myLibrary.length; i++) {
         //use this to check if the book has already been added
