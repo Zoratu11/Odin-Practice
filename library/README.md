@@ -1,6 +1,6 @@
 Simple project that displays info taken from book objects, you can also add new books.
 
-Book Object example:
+Book Object:
 ```
 function Book(title, author, numOfPages, isRead) {
     //constructor
