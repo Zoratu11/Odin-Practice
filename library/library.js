@@ -2,7 +2,7 @@ const gridContainer = document.querySelector(".grid-container");
 const formContainer = document.querySelector("#form-container");
 const showBookFormButton = document.querySelector("#show-form-btn");
 const closeBookFormButton = document.querySelector("#close-form-btn");
-const addBookButton = document.querySelector("#add-book-btn")
+const addBookButton = document.querySelector("#add-book-btn");
 
 const titleInput = document.getElementById("title");
 const authorInput = document.getElementById("author");
@@ -51,11 +51,7 @@ function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
-/*Adds library to DOM 
-If this was a real website I would make sure to keep track of the last
-book that was added so we dont loop through them all again but it doesnt
-really matter for this project*/
-function displayLibrary() {
+function generateBookCards() {
     for(let i = 0; i < myLibrary.length; i++) {
         //use this to check if the book has already been added
         const currentTitle = document.getElementById(`title${i}`);
@@ -66,8 +62,12 @@ function displayLibrary() {
                 <p id="title${i}"></p>
                 <p id="author${i}"></p>
                 <p id="pages${i}"></p>
-                <p id="isRead${i}"></p>     
+                <label for="isRead">Has been read: </label>
+                <input type="checkbox" id="isRead${i}"></p>
+                <button style="background-color: #B22222; margin-bottom: 8px;" 
+                class="btn" id="remove-book-btn-${i}">Remove Book</button>
             `;
+
             const bookDiv = document.createElement("div");
             bookDiv.classList.add("card");
             bookDiv.innerHTML = htmlBookDiv;
@@ -77,11 +77,28 @@ function displayLibrary() {
             const author = document.getElementById(`author${i}`);
             const pages = document.getElementById(`pages${i}`);
             const isRead = document.getElementById(`isRead${i}`);
+            const removeBookButton = document.getElementById(`remove-book-btn-${i}`);
+
+            isRead.addEventListener("change", () => {
+                let isRead = !myLibrary[i].isRead;  //flip bool value with !
+                myLibrary[i].isRead = isRead;
+            });
+
+            removeBookButton.addEventListener("click", () => {
+                myLibrary = myLibrary.filter((book) => book !== myLibrary[i]);
+                const parentDiv = title.parentElement;
+                //remove all cards because the old ones are outdated now, 
+                //shouldnt be a performance problem in this project
+                gridContainer.innerHTML = "";
+
+                //we removed all the cards so add them again but this time with the correct id
+                generateBookCards();
+            });
 
             title.textContent = `Title: ${myLibrary[i].title}`;
             author.textContent = `Author: ${myLibrary[i].author}`;
             pages.textContent = `Pages: ${myLibrary[i].numOfPages}`;
-            isRead.textContent = `Has been read: ${myLibrary[i].isRead}`;
+            isRead.checked = myLibrary[i].isRead;
         }
     }
 }
@@ -101,7 +118,7 @@ addBookButton.addEventListener("click", (event) => {
         closeBookForm();
 
         //display the new books
-        displayLibrary();
+        generateBookCards();
     } else {
         alert("You didn't fill out the form correctly. You missed filling in an input!!");
     }
@@ -117,4 +134,4 @@ addBookToLibrary(theHobbit);
 addBookToLibrary(cradle);
 addBookToLibrary(unsouled);
 
-displayLibrary();
+generateBookCards();
